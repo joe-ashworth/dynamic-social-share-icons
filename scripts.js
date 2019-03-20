@@ -1,27 +1,22 @@
+(function () {
+  const thisUrl = window.location.href;
+  const thisDescrip = $('.page-title').text();
 
-const share = {
-  thisUrl: window.location.href
-}
-share.thisDescrip = $('.page-title').text();
-share.fbLink =
-  'https://facebook.com/sharer/sharer.php?u' +
-  share.thisUrl;
-share.twitterLink =
-  'https://twitter.com/intent/tweet/?text=' +
-  share.thisDescrip + '&amp;url=' +
-  share.thisUrl
-share.emailLink =
-  'mailto:?subject=' +
-  share.thisDescrip +
-  '&amp;body=' +
-  share.thisUrl
-share.linkedLink =
-  'https://www.linkedin.com/shareArticle?mini=true&amp;url=' +
-  share.thisUrl + '&amp;title=' +
-  share.thisDescrip
-console.log(share)
+  function Share(url, description) {
+    this.fbLink = 'https://facebook.com/sharer/sharer.php?u' + url;
 
-$('.fbA').attr('href', share.fbLink);
-$('.twitterA').attr('href', share.twitterLink);
-$('.emailA').attr('href', share.emailLink);
-$('.linkedA').attr('href', share.linkedLink); 
+    this.twitterLink = 'https://twitter.com/intent/tweet/?text=' + description + '&amp;url=' + url
+
+    this.emailLink = 'mailto:?subject=' + description + '&body=' + url
+
+    this.linkedLink = 'https://www.linkedin.com/shareArticle?mini=true&url=' + url + '&title=' + description + '&summary=' + description
+  }
+
+  const share = new Share(thisUrl, thisDescrip);
+  console.log(share)
+
+  $('.fbA').attr('href', share.fbLink);
+  $('.twitterA').attr('href', share.twitterLink);
+  $('.emailA').attr('href', share.emailLink);
+  $('.linkedA').attr('href', share.linkedLink);
+}());
